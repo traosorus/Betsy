@@ -1,0 +1,7 @@
+Certainly, here's an example Python code for generating a random number:
+```python
+import random
+random_number = random.randint(1, 100)
+print("Random number between 1 and 100:", random_number)
+```
+This code uses the random library in Python to generate a random integer between 1 and 100, and then prints the result to the console.
