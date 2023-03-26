@@ -7,9 +7,10 @@ import os
 import shutil
 import time
 import threading
-from PIL import Image, ImageTk
 import subprocess
 
+
+# Sorry for the mister Frenglish 
 
 def center_window(window):
     w = 1200
@@ -355,6 +356,7 @@ class ChatbotGUI:
         # Afficher le tableau des fichiers
         shutil.copy(choice, "contexts/Temporary.json")
 
+    # MacOS change '/' with '\' for windows
     def __init__folders(self):
         self.path= os.path.expanduser("~")
         self.desktop_path = self.path+"/Desktop"
@@ -432,14 +434,7 @@ class ChatbotGUI:
         # Create delete button to initiate the delete confirmation process
         delete_button = tk.Button(delroot, text="Delete Selected File", command=delete_value)
         delete_button.pack()
-  
-    def run_betsy(self):
-        # Change directory to where Betsy.py is located
-        os.chdir('/Users/traosorus/Desktop/ChatbotAssistant/Codes/')
-        # Execute Betsy.py
-        os.system("python3 Betsy.py")
-        # Change directory back to original location
-        os.chdir('/Users/traosorus/Desktop/dossier sans titre/')
+ 
     def start_betsy_thread(self):
         # Create a new thread for running Betsy
         betsy_thread = threading.Thread(target=self.run_betsy)
