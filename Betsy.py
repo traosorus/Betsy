@@ -948,7 +948,7 @@ class Ui_MainWindow(object):
         self.pushButton_2.setFont(font)
         self.pushButton_2.setText("")
         icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("../../../Downloads/pngwing.com (9).png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon1.addPixmap(QtGui.QPixmap("pngwing.com (9).png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.pushButton_2.setIcon(icon1)
         self.pushButton_2.setIconSize(QtCore.QSize(60, 60))
         self.pushButton_2.setAutoRepeatDelay(294)
@@ -1775,7 +1775,7 @@ class Ui_MainWindow(object):
         self.label_4 = QtWidgets.QLabel(self.centralwidget)
         self.label_4.setGeometry(QtCore.QRect(800, 550, 251, 161))
         self.label_4.setText("")
-        self.label_4.setPixmap(QtGui.QPixmap("../../../Downloads/pngwing.com (6).png"))
+        self.label_4.setPixmap(QtGui.QPixmap("pngwing.com (6).png"))
         self.label_4.setScaledContents(False)
         self.label_4.setAlignment(QtCore.Qt.AlignCenter)
         self.label_4.setObjectName("label_4")
@@ -1783,7 +1783,7 @@ class Ui_MainWindow(object):
         self.pushButton_3.setGeometry(QtCore.QRect(40, 120, 91, 91))
         self.pushButton_3.setText("")
         icon2 = QtGui.QIcon()
-        icon2.addPixmap(QtGui.QPixmap("../../../Desktop/untitled/DevGPT/HISTORY.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon2.addPixmap(QtGui.QPixmap("HISTORY.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.pushButton_3.setIcon(icon2)
         self.pushButton_3.setIconSize(QtCore.QSize(50, 50))
         self.pushButton_3.setFlat(True)
@@ -1930,7 +1930,7 @@ class Ui_MainWindow(object):
         self.label_5.setAutoFillBackground(False)
         self.label_5.setStyleSheet("border-radius: 25px")
         self.label_5.setText("")
-        self.label_5.setPixmap(QtGui.QPixmap("../../../Downloads/pngwing.com (5).png"))
+        self.label_5.setPixmap(QtGui.QPixmap("pngwing.com (5).png"))
         self.label_5.setIndent(0)
         self.label_5.setObjectName("label_5")
         self.label_5.raise_()
@@ -2110,11 +2110,13 @@ class Ui_MainWindow(object):
         self.actionInscription.setText(_translate("MainWindow", "Inscription"))
         self.actionEntrer_une_Cl_API.setText(_translate("MainWindow", "Entrer une Clé API"))
         self.actionDocumentation.setText(_translate("MainWindow", "Documentation"))
-        
-import sys
-app = QtWidgets.QApplication(sys.argv)
-MainWindow = QtWidgets.QMainWindow()
-ui = Ui_MainWindow()
-ui.setupUi(MainWindow)
-MainWindow.show()
-sys.exit(app.exec_())
+
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    MainWindow = QtWidgets.QMainWindow()
+    ui = Ui_MainWindow()
+    ui.setupUi(MainWindow)
+    MainWindow.show()
+    sys.exit(app.exec_())

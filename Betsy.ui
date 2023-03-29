@@ -2819,7 +2819,7 @@ p, li { white-space: pre-wrap; }
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>../../../Downloads/pngwing.com (9).png</normaloff>../../../Downloads/pngwing.com (9).png</iconset>
+       <normaloff>pngwing.com (9).png</normaloff>pngwing.com (9).png</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -5341,7 +5341,7 @@ font: 13pt &quot;Futura&quot;;</string>
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>../../../Downloads/pngwing.com (6).png</pixmap>
+     <pixmap>pngwing.com (6).png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>false</bool>
@@ -5364,7 +5364,7 @@ font: 13pt &quot;Futura&quot;;</string>
     </property>
     <property name="icon">
      <iconset>
-      <normaloff>../../../Desktop/untitled/DevGPT/HISTORY.png</normaloff>../../../Desktop/untitled/DevGPT/HISTORY.png</iconset>
+      <normaloff>HISTORY.png</normaloff>HISTORY.png</iconset>
     </property>
     <property name="iconSize">
      <size>
@@ -5810,7 +5810,7 @@ font: 13pt &quot;Futura&quot;;</string>
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>../../../Downloads/pngwing.com (5).png</pixmap>
+     <pixmap>pngwing.com (5).png</pixmap>
     </property>
     <property name="indent">
      <number>0</number>
