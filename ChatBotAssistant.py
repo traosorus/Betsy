@@ -13,8 +13,8 @@ import subprocess
 # Sorry for the mister Frenglish 
 
 def center_window(window):
-    w = 1200
-    h = 800
+    w = 900
+    h = 500
 
     # get screen width and height
     ws = window.winfo_screenwidth()  # width of the screen
@@ -75,7 +75,7 @@ class Create_context_Define_gui():
             self.Body.append(entry2)
         system = {'role': 'system', 'content': self.entry.get("1.0", END)}
         self.Body.insert(0, system)
-        self.Title = "contexts\" + self.contexttitle + ".json"
+        self.Title = "contexts/" + self.contexttitle + ".json"
         with open(self.Title, "w") as f:
             json.dump(self.Body, f)
         self.root.destroy()
@@ -112,7 +112,7 @@ class ChatbotGUI:
         self.chat_frame.pack(side=tk.LEFT, padx=20)
 
         # Create chat log text widget
-        self.chat_log = tk.Text(self.chat_frame, height=40, width=90, state=DISABLED)
+        self.chat_log = tk.Text(self.chat_frame, height=20, width=90, state=DISABLED)
         self.chat_log.pack(side=tk.TOP)
 
         # Create input frame
@@ -241,8 +241,8 @@ class ChatbotGUI:
         # Get input message and add it to chat log
         requests = self.input_entry.get("1.0", tk.END)
         request = {'role': 'user', 'content': requests}
-        self.add_to_json_file("contexts\Temporary.json", request)
-        reque = "contexts\Temporary.json"
+        self.add_to_json_file("contexts/Temporary.json", request)
+        reque = "contexts/Temporary.json"
         self.chat_log.insert(tk.END, "\n" + "\n")
 
         self.chat_log.insert(tk.END, "User: " + requests)
@@ -253,7 +253,7 @@ class ChatbotGUI:
         self.mordicus = self.response
         self.chat_log.insert(tk.END, "\n" + "\n")
         self.animate_text(destination=self.chat_log,text="Assistant: "+self.response,delay=0.0000000000000000000001)
-        with open("\Users\traosorus\Desktop\ChatbotAssistant\Codes\test.txt", "w") as z:
+        with open("C:/Users/hp/Desktop/ChatbotAssistant/Codes/test.txt", "w") as z:
             z.write(self.response)
         # Clear input entry widget
 
@@ -268,13 +268,13 @@ class ChatbotGUI:
             # Code for sending message to chatbot and getting self.response
             self.response = chatCompletion(message)
             resp = {'role': 'user', 'content': self.response.response}
-            self.add_to_json_file("contexts\Temporary.json", resp)
+            self.add_to_json_file("contexts/Temporary.json", resp)
             answer= self.response.response
         except:
-            with open("contexts\Temporary.json","r") as df:
+            with open("contexts/Temporary.json","r") as df:
              historique = json.load(df)
              del historique[:10]
-             with open("contexts\Temporary.json","w") as dff:
+             with open("contexts/Temporary.json","w") as dff:
                 json.dump(historique, dff)
                 answer = " \n \n ERREUR LORS DE LA COMPLETION ESSAYEZ RENVOYER LE MESSAGE SI LE PROBLÉME PERSISTE VERIFIEZ 'ETAT DE LA CONNECTION ET REDEMARREZ L'APPLICATION "
 
@@ -291,7 +291,7 @@ class ChatbotGUI:
         json_data.append(data)
 
         # Ouvrir le fichier en mode écriture et écrire les nouvelles données
-        with open("contexts\Temporary.json", "w") as f:
+        with open("contexts/Temporary.json", "w") as f:
             json.dump(json_data, f)
 
     def New_bot(self):
@@ -302,9 +302,9 @@ class ChatbotGUI:
         self.systemEntry.configure(state=DISABLED)
 
         # Ouvrir le fichier en mode écriture et écrire les nouvelles données
-        with open("contexts\Temporary.json", "w") as f:
+        with open("contexts/Temporary.json", "w") as f:
             json.dump([{"role": "system", "content": "You are a sarcastic assistant"}], f)
-        self.selected_value.set("contexts\Default.json")
+        self.selected_value.set("contexts/Default.json")
         self.galimatia()
 
     def saveBot(self):
@@ -321,8 +321,8 @@ class ChatbotGUI:
 
             os.makedirs("contexts", exist_ok=True)  # créer le répertoire s'il n'existe pas
 
-            temp_file = "contexts\Temporary.json"
-            save_file = f"contexts\{chat_name}.json"
+            temp_file = "contexts/Temporary.json"
+            save_file = f"contexts/{chat_name}.json"
 
             with open(temp_file, "r") as f:
                 data = json.load(f)
@@ -346,7 +346,7 @@ class ChatbotGUI:
         for nom_fichier in os.listdir(dossier):
             chemin_fichier = os.path.join(dossier, nom_fichier)
             # Vérifier si le fichier est un fichier et pas un dossier
-            if os.path.isfile(chemin_fichier) and chemin_fichier != "contexts\Temporary.json":
+            if os.path.isfile(chemin_fichier) and chemin_fichier != "contexts/Temporary.json":
                 # Ajouter le chemin du fichier au tableau
                 fichiers.append(str(chemin_fichier))
 
@@ -354,25 +354,25 @@ class ChatbotGUI:
 
     def __init__Temporary(self, choice):
         # Afficher le tableau des fichiers
-        shutil.copy(choice, "contexts\Temporary.json")
+        shutil.copy(choice, "contexts/Temporary.json")
 
     # MacOS change '/' with '\' for windows
     def __init__folders(self):
         self.path= os.path.expanduser("~")
-        self.desktop_path = self.path+"\Desktop"
-        self.kernel_path= self.desktop_path+"\ChatbotAssistant"
-        self.code_path= self.desktop_path+"\ChatbotAssistant\Codes"
+        self.desktop_path = self.path+"/Desktop"
+        self.kernel_path= self.desktop_path+"/ChatbotAssistant"
+        self.code_path= self.desktop_path+"/ChatbotAssistant/Codes"
         
         try:
             os.mkdir(self.kernel_path)
             os.mkdir(self.code_path)
         except FileExistsError:
             print(" Do Pass")
-        with open(self.code_path+"\test.txt", 'a') as cash:
+        with open(self.code_path+"/test.txt", 'a') as cash:
                 cash.write("")
     def extract(self):
       
-        with open(self.code_path+"\test.txt", 'r') as file:
+        with open(self.code_path+"/test.txt", 'r') as file:
             self.code = file.read()
             print(self.code)
         
@@ -404,7 +404,7 @@ class ChatbotGUI:
 
 
 
-            with open(self.code_path+"\Betsy.py", "w") as f:
+            with open(self.code_path+"/Betsy.py", "w") as f:
                 f.write(code_block)
                 
             self.Runcode.insert(END,code_block)
