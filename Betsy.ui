@@ -1932,6 +1932,9 @@
        </disabled>
       </palette>
      </property>
+     <property name="styleSheet">
+      <string notr="true">border-radius: 12px</string>
+     </property>
      <property name="html">
       <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
@@ -2816,7 +2819,7 @@ p, li { white-space: pre-wrap; }
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>../../../Downloads/pngwing.com (9).png</normaloff>../../../Downloads/pngwing.com (9).png</iconset>
+       <normaloff>pngwing.com (9).png</normaloff>pngwing.com (9).png</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -2842,9 +2845,39 @@ p, li { white-space: pre-wrap; }
       <rect>
        <x>60</x>
        <y>10</y>
-       <width>411</width>
+       <width>401</width>
        <height>541</height>
       </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Maximum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>401</width>
+       <height>541</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>401</width>
+       <height>541</height>
+      </size>
+     </property>
+     <property name="sizeIncrement">
+      <size>
+       <width>36</width>
+       <height>53</height>
+      </size>
+     </property>
+     <property name="baseSize">
+      <size>
+       <width>25</width>
+       <height>15</height>
+      </size>
      </property>
      <property name="palette">
       <palette>
@@ -3264,8 +3297,24 @@ p, li { white-space: pre-wrap; }
      <property name="font">
       <font>
        <family>Futura</family>
-       <pointsize>14</pointsize>
+       <pointsize>13</pointsize>
+       <weight>50</weight>
+       <italic>false</italic>
+       <bold>false</bold>
       </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border-radius: -25px;
+font: 13pt &quot;Futura&quot;;</string>
+     </property>
+     <property name="verticalScrollBarPolicy">
+      <enum>Qt::ScrollBarAlwaysOn</enum>
+     </property>
+     <property name="sizeAdjustPolicy">
+      <enum>QAbstractScrollArea::AdjustIgnored</enum>
+     </property>
+     <property name="textInteractionFlags">
+      <set>Qt::LinksAccessibleByKeyboard|Qt::LinksAccessibleByMouse|Qt::TextBrowserInteraction|Qt::TextEditable|Qt::TextEditorInteraction|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
      </property>
      <property name="backgroundVisible">
       <bool>false</bool>
@@ -3274,7 +3323,7 @@ p, li { white-space: pre-wrap; }
       <bool>true</bool>
      </property>
      <property name="placeholderText">
-      <string extracomment="ChatBotAssistant"/>
+      <string extracomment="ChatBotAssistant">ChatLog</string>
      </property>
     </widget>
     <widget class="QTextEdit" name="textEdit">
@@ -5292,7 +5341,7 @@ p, li { white-space: pre-wrap; }
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>../../../Downloads/pngwing.com (6).png</pixmap>
+     <pixmap>pngwing.com (6).png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>false</bool>
@@ -5315,7 +5364,7 @@ p, li { white-space: pre-wrap; }
     </property>
     <property name="icon">
      <iconset>
-      <normaloff>../../../Desktop/untitled/DevGPT/HISTORY.png</normaloff>../../../Desktop/untitled/DevGPT/HISTORY.png</iconset>
+      <normaloff>HISTORY.png</normaloff>HISTORY.png</iconset>
     </property>
     <property name="iconSize">
      <size>
@@ -5754,17 +5803,20 @@ p, li { white-space: pre-wrap; }
     <property name="autoFillBackground">
      <bool>false</bool>
     </property>
-    <property name="lineWidth">
-     <number>-1</number>
+    <property name="styleSheet">
+     <string notr="true">border-radius: 25px</string>
     </property>
     <property name="text">
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>../../../Downloads/pngwing.com (5).png</pixmap>
+     <pixmap>pngwing.com (5).png</pixmap>
     </property>
     <property name="indent">
      <number>0</number>
+    </property>
+    <property name="buddy">
+     <cstring>plainTextEdit</cstring>
     </property>
    </widget>
    <zorder>label_5</zorder>
