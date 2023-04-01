@@ -13,8 +13,8 @@ import subprocess
 # Sorry for the mister Frenglish 
 
 def center_window(window):
-    w = 900
-    h = 500
+    w = 1000
+    h = 600
 
     # get screen width and height
     ws = window.winfo_screenwidth()  # width of the screen
@@ -75,7 +75,7 @@ class Create_context_Define_gui():
             self.Body.append(entry2)
         system = {'role': 'system', 'content': self.entry.get("1.0", END)}
         self.Body.insert(0, system)
-        self.Title = "contexts/" + self.contexttitle + ".json"
+        self.Title = "ChatBotAssistant V1/contexts/" + self.contexttitle + ".json"
         with open(self.Title, "w") as f:
             json.dump(self.Body, f)
         self.root.destroy()
@@ -85,7 +85,7 @@ class chatCompletion:
 
     # context est un fichier json
     def __init__(self, context):
-        openai.api_key = <Your API KEY>
+        openai.api_key = "APi key"
         self.context = self.jsonload(filename=context)
         self.completion = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
@@ -101,7 +101,8 @@ class chatCompletion:
 
 
 class ChatbotGUI:
-    def __init__(self, master):
+
+    def gui(self, master):
         self.__init__folders()
         self.master = master
         self.master.title("Chatbot")
@@ -112,14 +113,14 @@ class ChatbotGUI:
         self.chat_frame.pack(side=tk.LEFT, padx=20)
 
         # Create chat log text widget
-        self.chat_log = tk.Text(self.chat_frame, height=20, width=90, state=DISABLED)
-        self.chat_log.pack(side=tk.TOP)
+        self.chat_log = tk.Text(self.chat_frame, height=20, width=80, state=DISABLED)
+        self.chat_log.pack(side=tk.TOP,pady=15,padx=10)
 
         # Create input frame
         self.input_frame = tk.LabelFrame(master, text="SYSTEM")
         self.input_frame.pack(side=tk.TOP, padx=10, pady=10)
         # Add input widget to input frame
-        self.systemEntry = tk.Text(self.input_frame, height=12, width=50)
+        self.systemEntry = tk.Text(self.input_frame, height=12, width=30)
         self.systemEntry.pack(padx=5)
 
         # Create input label and entry widget
@@ -140,7 +141,7 @@ class ChatbotGUI:
         self.options = self.context_list()
 
         self.combo_box = ttk.Combobox(self.input_frame, textvariable=self.selected_value, values=self.options)
-        self.selected_value.set("contexts/Default.json")
+        self.selected_value.set("ChatBotAssistant V1/contexts/Default.json")
         self.combo_box.pack(side=tk.RIGHT, padx=10, pady=10)
         # Fonction pour récupérer la valeur sélectionnée
 
@@ -173,10 +174,11 @@ class ChatbotGUI:
         self.Menucontext.add_command(label="Mettre à jour la Liste des contextes", command=self.Updatelist)
         self.Menucontext.add_command(label="Supprimer un contexte", command=self.Delete_context)
         self.menu_bar.add_cascade(label="contexte", menu=self.Menucontext)
-        self.Runcode = tk.Text(self.master,height=30,width=60)
+        self.Runcode = tk.Text(self.master,height=30,width=40)
         self.Runcode.pack(pady=10)
         # Configurer la fenêtre pour utiliser la barre de menu
         self.master.config(menu=self.menu_bar)
+        self.master.bind("<Button-2>", self.do_popup)
 
     # -------------------------------------------------------------------Functions----------------------------------------------------------------------------------------------------------------------------------------------------------------------
     # -------------------------------------------------------------------Functions----------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -194,7 +196,7 @@ class ChatbotGUI:
 
     def galimatia(self):
         self.systemEntry.configure(state=NORMAL)
-        with open("contexts/Temporary.json", "r") as f:
+        with open("ChatBotAssistant V1/contexts/Temporary.json", "r") as f:
             # Charger les données JSON existantes
             json_data = json.load(f)
             json_data = json_data[0]
@@ -241,9 +243,9 @@ class ChatbotGUI:
         # Get input message and add it to chat log
         requests = self.input_entry.get("1.0", tk.END)
         request = {'role': 'user', 'content': requests}
-        self.add_to_json_file("contexts/Temporary.json", request)
-        reque = "contexts/Temporary.json"
-        self.chat_log.insert(tk.END, "\n" + "\n")
+        self.add_to_json_file("ChatBotAssistant V1/contexts/Temporary.json", request)
+        reque = "ChatBotAssistant V1/contexts/Temporary.json"
+        self.chat_log.insert(tk.END, "\n" + "\n"+ "\n")
 
         self.chat_log.insert(tk.END, "User: " + requests)
         self.input_entry.delete("1.0", tk.END)
@@ -252,8 +254,8 @@ class ChatbotGUI:
         self.response = self.send_message_to_chatbot(reque)
         self.mordicus = self.response
         self.chat_log.insert(tk.END, "\n" + "\n")
-        self.animate_text(destination=self.chat_log,text="Assistant: "+self.response,delay=0.0000000000000000000001)
-        with open("C:/Users/hp/Desktop/ChatbotAssistant/Codes/test.txt", "w") as z:
+        self.animate_text(destination=self.chat_log,text="Betsy_AI : "+self.response,delay=0.0000000000000000000001)
+        with open(self.code_path+"/test.txt", "w") as z:
             z.write(self.response)
         # Clear input entry widget
 
@@ -268,13 +270,13 @@ class ChatbotGUI:
             # Code for sending message to chatbot and getting self.response
             self.response = chatCompletion(message)
             resp = {'role': 'user', 'content': self.response.response}
-            self.add_to_json_file("contexts/Temporary.json", resp)
+            self.add_to_json_file("ChatBotAssistant V1/contexts/Temporary.json", resp)
             answer= self.response.response
         except:
-            with open("contexts/Temporary.json","r") as df:
+            with open("ChatBotAssistant V1/contexts/Temporary.json","r") as df:
              historique = json.load(df)
              del historique[:10]
-             with open("contexts/Temporary.json","w") as dff:
+             with open("ChatBotAssistant V1/contexts/Temporary.json","w") as dff:
                 json.dump(historique, dff)
                 answer = " \n \n ERREUR LORS DE LA COMPLETION ESSAYEZ RENVOYER LE MESSAGE SI LE PROBLÉME PERSISTE VERIFIEZ 'ETAT DE LA CONNECTION ET REDEMARREZ L'APPLICATION "
 
@@ -291,7 +293,7 @@ class ChatbotGUI:
         json_data.append(data)
 
         # Ouvrir le fichier en mode écriture et écrire les nouvelles données
-        with open("contexts/Temporary.json", "w") as f:
+        with open("ChatBotAssistant V1/contexts/Temporary.json", "w") as f:
             json.dump(json_data, f)
 
     def New_bot(self):
@@ -302,9 +304,9 @@ class ChatbotGUI:
         self.systemEntry.configure(state=DISABLED)
 
         # Ouvrir le fichier en mode écriture et écrire les nouvelles données
-        with open("contexts/Temporary.json", "w") as f:
+        with open("ChatBotAssistant V1/contexts/Temporary.json", "w") as f:
             json.dump([{"role": "system", "content": "You are a sarcastic assistant"}], f)
-        self.selected_value.set("contexts/Default.json")
+        self.selected_value.set("ChatBotAssistant V1/contexts/Default.json")
         self.galimatia()
 
     def saveBot(self):
@@ -321,8 +323,8 @@ class ChatbotGUI:
 
             os.makedirs("contexts", exist_ok=True)  # créer le répertoire s'il n'existe pas
 
-            temp_file = "contexts/Temporary.json"
-            save_file = f"contexts/{chat_name}.json"
+            temp_file = "ChatBotAssistant V1/contexts/Temporary.json"
+            save_file = f"ChatBotAssistant V1/contexts/{chat_name}.json"
 
             with open(temp_file, "r") as f:
                 data = json.load(f)
@@ -337,7 +339,7 @@ class ChatbotGUI:
 
     def context_list(self):
         # Définir le dossier à répertorier
-        dossier = "contexts"
+        dossier = "ChatBotAssistant V1/contexts"
 
         # Initialiser le tableau
         fichiers = []
@@ -346,7 +348,7 @@ class ChatbotGUI:
         for nom_fichier in os.listdir(dossier):
             chemin_fichier = os.path.join(dossier, nom_fichier)
             # Vérifier si le fichier est un fichier et pas un dossier
-            if os.path.isfile(chemin_fichier) and chemin_fichier != "contexts/Temporary.json":
+            if os.path.isfile(chemin_fichier) and chemin_fichier != "ChatBotAssistant V1/contexts/Temporary.json":
                 # Ajouter le chemin du fichier au tableau
                 fichiers.append(str(chemin_fichier))
 
@@ -354,7 +356,7 @@ class ChatbotGUI:
 
     def __init__Temporary(self, choice):
         # Afficher le tableau des fichiers
-        shutil.copy(choice, "contexts/Temporary.json")
+        shutil.copy(choice, "ChatBotAssistant V1/contexts/Temporary.json")
 
     # MacOS change '/' with '\' for windows
     def __init__folders(self):
@@ -440,11 +442,42 @@ class ChatbotGUI:
         betsy_thread = threading.Thread(target=self.run_betsy)
         # Start the thread
         betsy_thread.start()
+        
+    def do_popup(self,event):
+        m = Menu(self.master, tearoff = 0)
+        m.add_command(label ="Copier", command=self.copier)
+        m.add_command(label ="Coller", command=self.coller)
+        m.add_separator()
+        try:
+            m.tk_popup(event.x_root, event.y_root)
+        finally:
+            m.grab_release()
+    def couper(self):
+        self.master.clipboard_clear()
+        a=self.master.focus_get().index(ANCHOR)
+        i=self.master.focus_get().index(INSERT)
+        if i<a:a,i=i,a
+        t=self.master.focus_get().get()
+        s=t[a:i]
+        t=t[0:a] + t[i:]
+        self.master.focus_get().delete(0,END)
+        self.master.focus_get().insert(0, t)
+        self.master.focus_get().icursor(a)
+        self.master.clipboard_append(s)
+    
+    def copier(self):
+        self.master.clipboard_clear()
+        self.master.clipboard_append(self.master.selection_get())
+    
+    def coller(self):
+        t=self.master.selection_get(selection='CLIPBOARD')
+        self.master.focus_get().insert(INSERT,t) 
 # Initialize Tkinter
 root = tk.Tk()
 
 # Initialize chatbot GUI
-chatbot_gui = ChatbotGUI(root)
+ChatbotGUI().gui(root)
+
 
 # Start main event loop
 root.mainloop()
