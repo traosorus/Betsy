@@ -90,7 +90,6 @@ class Engine :
         shutil.copy(choice, "contexts/Temporary.json")
 
     #initialisation des dossiers et fichiers de running
-    @classmethod
     def _init__folders(self):
         self.path= os.path.expanduser("~")
         self.desktop_path = self.path+"/Desktop"
@@ -104,7 +103,20 @@ class Engine :
             print(" Do Pass")
         with open(self.code_path+"/test.txt", 'a') as cash:
                 cash.write("")
-                
+ # Fonctions  Liées au actions des différents Menu
+    def New_bot(self, input, output, system):
+        output.setEnabled(True)
+        input.setEnabled(True)
+        system.setEnabled(True)
+        system.clear()
+        input.clear()
+        output.clear()
+        system.setEnabled(False)
+
+        # Ouvrir le fichier en mode écriture et écrire les nouvelles données
+        with open("contexts/Temporary.json", "w") as f:
+            json.dump([{"role": "system", "content": " Sarcastic assistant !"}], f)
+        self.galimatia(system=system)
  # Outils BackEnD----------------------------------------------------------------------------------------------------
     def galimatia(self,system):
         with open("contexts/Temporary.json", "r") as f:
