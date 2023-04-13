@@ -9,6 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtCore import QThread
 import sys
 
 
@@ -20,6 +21,7 @@ class BetsyGUI(object):
         self.MainWindow.setObjectName("self.MainWindow")
         self.MainWindow.resize(644, 487)
         self.MainWindow.setSizeIncrement(QtCore.QSize(1, 0))
+        self.worker_thread = QThread()
 
         self.centralwidget = QtWidgets.QWidget(self.MainWindow)
         self.centralwidget.setAutoFillBackground(False)
@@ -179,5 +181,8 @@ class BetsyGUI(object):
 
     def startApp(self):
         self.MainWindow.show()
+        self.userentry.moveToThread(self.worker_thread)
         sys.exit(self.app.exec_())
+        
+
         

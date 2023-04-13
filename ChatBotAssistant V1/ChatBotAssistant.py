@@ -85,7 +85,7 @@ class chatCompletion:
 
     # context est un fichier json
     def __init__(self, context):
-        openai.api_key = "APi key"
+        openai.api_key = "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"
         self.context = self.jsonload(filename=context)
         self.completion = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
@@ -237,7 +237,7 @@ class ChatbotGUI:
         previewLabel.pack()
         getcontexttitle = tk.Button(master=self.preview, text="Valider", command=getentryctx)
         getcontexttitle.pack()
-
+        
     def submit_message(self):
         
         # Get input message and add it to chat log
@@ -264,6 +264,7 @@ class ChatbotGUI:
         # Create a new thread to run the submit_message() method
         thread = threading.Thread(target=self.submit_message)
         thread.start()
+
         
     def send_message_to_chatbot(self, message):
         try:
