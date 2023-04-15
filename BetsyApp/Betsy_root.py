@@ -14,7 +14,7 @@ from ChatCompletion import chatCompletion
 
 class Engine:
     def __init__(self):
-        self.api_key = "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"
+        self.api_key = "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"
         self.model = "gpt-3.5-turbo"
         self.temp_file_path = "BetsyApp/contexts/Temporary.json"
         self.contexts_dir = "BetsyApp/contexts"
