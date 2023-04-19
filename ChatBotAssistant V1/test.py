@@ -80,7 +80,7 @@ class ChatBot(QtWidgets.QWidget):
         # Dans cet exemple, le chatbot renvoie simplement un message de réponse aléatoire
         # Note: you need to be using OpenAI Python v0.27.0 for the code below to work
         import openai
-        openai.api_key = "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"
+        openai.api_key = "API KEY"
         completion = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=[

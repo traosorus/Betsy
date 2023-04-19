@@ -2,9 +2,7 @@ import openai
 import json
 import os
 import shutil
-import time
-import threading
-import subprocess
+from Whisper import Transcriber
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QCoreApplication, QEventLoop, QTimer, QThread
 import sys
@@ -14,7 +12,7 @@ from ChatCompletion import chatCompletion
 
 class Engine:
     def __init__(self):
-        self.api_key = "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"
+        self.api_key = "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"
         self.model = "gpt-3.5-turbo"
         self.temp_file_path = "BetsyApp/contexts/Temporary.json"
         self.contexts_dir = "BetsyApp/contexts"
@@ -43,7 +41,7 @@ class Engine:
         response = str(completion.choices[0].message["content"])
         return response
 
-    def submit_message(self, output, input):
+    def submit_message(self, output, input,temp,tokens):
         
         request = input.toPlainText()
         input.clear()
@@ -51,7 +49,7 @@ class Engine:
         request_data = {'role': 'user', 'content': request}
         self._add_to_json_file(self.temp_file_path, request_data)
         request_file_path = self.temp_file_path
-        self.response_thread = chatCompletion(request_file_path)
+        self.response_thread = chatCompletion(request_file_path,temp=temp,maxtkns=tokens)
         self.response_thread.responseChanged.connect(lambda response: self._update_output(response, output))
         self.response_thread.start()
 
@@ -136,19 +134,95 @@ class Engine:
         else:
             self.timer.stop()
             
-class MonThread(QThread):
-    def __init__(self,inp,out,lemos):
-        super(MonThread, self).__init__()
-        self.output= out
-        self.input= inp
-        self.lemos = lemos
+ 
+    def save_Bot(self):
+        box = EnregistrerDialog()
+ 
+        box.StartApp()
+    
+    def transcript(self,tm):
+        ts = Transcriber(tm)
+        return ts.transcript
+        
 
-    def run(self):
-        """Code exécuté dans le thread"""
-        print("Le thread a commencé.")
-        self.lemos.submit_message(output=self.output,input=self.input)
-        time.sleep(5)
-        print("Le thread a terminé.")
+from PyQt5.QtWidgets import QDialog, QLabel, QLineEdit, QPushButton, QVBoxLayout
+
+class EnregistrerDialog():
+    def __init__(self):
+        self.dial = QDialog()
+        
+    def setupUi(self, Dialog):
+        Dialog.setObjectName("Enregistrer la Séance de travail")
+        Dialog.resize(476, 223)
+        self.verticalLayout = QtWidgets.QVBoxLayout(Dialog)
+        self.verticalLayout.setObjectName("verticalLayout")
+        self.label = QtWidgets.QLabel(Dialog)
+        self.label.setAlignment(QtCore.Qt.AlignCenter)
+        self.label.setObjectName("label")
+        self.verticalLayout.addWidget(self.label)
+        self.widget = QtWidgets.QWidget(Dialog)
+        self.widget.setObjectName("widget")
+        self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.widget)
+        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
+        self.label_2 = QtWidgets.QLabel(self.widget)
+        self.label_2.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_2.setObjectName("label_2")
+        self.horizontalLayout_2.addWidget(self.label_2)
+        self.lineEdit = QtWidgets.QLineEdit(self.widget)
+        self.lineEdit.setMaximumSize(QtCore.QSize(171, 16777215))
+        self.lineEdit.setObjectName("lineEdit")
+        self.horizontalLayout_2.addWidget(self.lineEdit)
+        self.verticalLayout.addWidget(self.widget)
+        self.widget_2 = QtWidgets.QWidget(Dialog)
+        self.widget_2.setObjectName("widget_2")
+        self.horizontalLayout = QtWidgets.QHBoxLayout(self.widget_2)
+        self.horizontalLayout.setObjectName("horizontalLayout")
+        self.pushButton_2 = QtWidgets.QPushButton(self.widget_2)
+        self.pushButton_2.setObjectName("pushButton_2")
+        self.horizontalLayout.addWidget(self.pushButton_2)
+        self.pushButton = QtWidgets.QPushButton(self.widget_2)
+        self.pushButton.setObjectName("pushButton")
+        self.horizontalLayout.addWidget(self.pushButton)
+        self.verticalLayout.addWidget(self.widget_2)
+        self.pushButton_2.clicked.connect(self.save_context)
+        self.pushButton.clicked.connect(self.dial.close)
+        self.retranslateUi(Dialog)
+        QtCore.QMetaObject.connectSlotsByName(Dialog)
+
+    def retranslateUi(self, Dialog):
+        _translate = QtCore.QCoreApplication.translate
+        Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
+        self.label.setText(_translate("Dialog", "Enregistrer la Séance de travail"))
+        self.label_2.setText(_translate("Dialog", "Entrer le nom du contexte"))
+        self.pushButton_2.setText(_translate("Dialog", "Enregister"))
+        self.pushButton.setText(_translate("Dialog", "Annuler"))
+    
+    def save_context(self):
+        root = Engine()
+        print("saving...")
+        sett = root._json_load(root.temp_file_path)
+        contextname = self.lineEdit.text()
+        if contextname!="":
+            print("saving...")
+            with open("BetsyApp/contexts/"+contextname+".json","w") as savings:
+                json.dump(sett,savings)
+                print("saved !")
+                self.dial.close()
+        else:
+            self.label.setText( "...Entrez un nom pour le contexte...")   
+                
+    
+        
+    def StartApp(self):
+        self.setupUi(Dialog=self.dial)
+        self.dial.exec_()
+         
+        
+        
+    
+        
+            
+
         
 
 

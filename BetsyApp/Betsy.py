@@ -10,18 +10,21 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QThread
+from PyQt5.QtWidgets import QDialog
+from CtxtGui import Ui_Form
 import sys
-
+apps = QtWidgets.QApplication(sys.argv)
 
 class BetsyGUI(object):
     
     def __init__(self):
-        self.app = QtWidgets.QApplication(sys.argv)
+        self.app = apps
         self.MainWindow = QtWidgets.QMainWindow()
         self.MainWindow.setObjectName("self.MainWindow")
         self.MainWindow.resize(644, 487)
         self.MainWindow.setSizeIncrement(QtCore.QSize(1, 0))
         self.worker_thread = QThread()
+        self.ctxgui =Ui_Form()
 
         self.centralwidget = QtWidgets.QWidget(self.MainWindow)
         self.centralwidget.setAutoFillBackground(False)
@@ -41,7 +44,7 @@ class BetsyGUI(object):
         self.sendButton.setGeometry(QtCore.QRect(190, 340, 61, 51))
         self.sendButton.setText("")
         icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("../../../Desktop/GitHub/Betsy/pngwing.com (9).png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon1.addPixmap(QtGui.QPixmap("BetsyApp/Images/pngwing.com (9).png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.sendButton.setIcon(icon1)
         self.sendButton.setIconSize(QtCore.QSize(50, 50))
         self.sendButton.setFlat(True)
@@ -55,8 +58,8 @@ class BetsyGUI(object):
         self.applyButton.setGeometry(QtCore.QRect(190, 150, 41, 31))
         self.applyButton.setText("")
         icon2 = QtGui.QIcon()
-        icon2.addPixmap(QtGui.QPixmap("../../../Desktop/GitHub/Betsy/button_blank_red_14987.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        icon2.addPixmap(QtGui.QPixmap("../../../Desktop/GitHub/Betsy/button_blank_green_14986.png"), QtGui.QIcon.Normal, QtGui.QIcon.On)
+        icon2.addPixmap(QtGui.QPixmap("BetsyApp/Images/button_blank_red_14987.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon2.addPixmap(QtGui.QPixmap("BetsyApp/Images/button_blank_green_14986.png"), QtGui.QIcon.Normal, QtGui.QIcon.On)
         self.applyButton.setIcon(icon2)
         self.applyButton.setIconSize(QtCore.QSize(30, 29))
         self.applyButton.setFlat(True)
@@ -70,7 +73,7 @@ class BetsyGUI(object):
         self.logo = QtWidgets.QLabel(self.centralwidget)
         self.logo.setGeometry(QtCore.QRect(340, 290, 261, 141))
         self.logo.setText("")
-        self.logo.setPixmap(QtGui.QPixmap("../../../Desktop/GitHub/Betsy/pngwing.com (6).png"))
+        self.logo.setPixmap(QtGui.QPixmap("BetsyApp/Images/pngwing.com (6).png"))
         self.logo.setAlignment(QtCore.Qt.AlignCenter)
         self.logo.setObjectName("logo")
         self.currentprompttokens = QtWidgets.QLCDNumber(self.centralwidget)
@@ -155,8 +158,9 @@ class BetsyGUI(object):
         self.menubar.addAction(self.menuParam_tres.menuAction())
         self.menubar.addAction(self.menuAide.menuAction())
         self.menubar.setFont(QtGui.QFont("Arial", 10))
-        self.retranslateUi(self.MainWindow)
+        self.actionNouveau_Contexte.triggered.connect(self.ctxgui.StartApp)
         
+        self.retranslateUi(self.MainWindow)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -177,12 +181,8 @@ class BetsyGUI(object):
         self.actionExporter_la_s_ance_de_travail.setText(_translate("MainWindow", "Exporter la séance de travail"))
         self.actionQuitter.setText(_translate("MainWindow", "Quitter"))
 
-
-
     def startApp(self):
         self.MainWindow.show()
         self.userentry.moveToThread(self.worker_thread)
         sys.exit(self.app.exec_())
-        
 
-        
