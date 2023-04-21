@@ -76,7 +76,7 @@ class BetsyGUI(object):
         self.userentry.setObjectName("userentry")
         self.gridLayout.addWidget(self.userentry, 0, 0, 2, 1)
         self.Duration_label = QtWidgets.QLabel(self.widget_3)
-        self.Duration_label.setMaximumSize(QtCore.QSize(267, 152))
+        self.Duration_label.setMaximumSize(QtCore.QSize(2657, 152))
         self.Duration_label.setStyleSheet("QLabel {\n"
 "  border-radius: 20px;\n"
 "  background-color: green;\n"
@@ -84,7 +84,7 @@ class BetsyGUI(object):
 "  padding: 5px;\n"
 "}")
         self.Duration_label.setObjectName("Duration_label")
-        self.gridLayout.addWidget(self.Duration_label, 2, 1, 2, 2)
+        self.gridLayout.addWidget(self.Duration_label, 2, 0, 2, 1)
         self.verticalLayout.addWidget(self.widget_3)
         self.verticalLayout.setStretch(0, 2)
         self.verticalLayout.setStretch(2, 1)
@@ -153,6 +153,18 @@ class BetsyGUI(object):
         self.templabel.setObjectName("templabel")
         self.verticalLayout_2.addWidget(self.templabel)
         self.tempdisplay = QtWidgets.QLCDNumber(self.widget_2)
+        self.templabel.setStyleSheet("QLabel {\n"
+"  border-radius: 10px;\n"
+"  background-color: green;\n"
+"  color: #000000;\n"
+"  padding: 5px;\n"
+"}")
+        self.tokenlabel.setStyleSheet("QLabel {\n"
+"  border-radius: 10px;\n"
+"  background-color: green;\n"
+"  color: #000000;\n"
+"  padding: 5px;\n"
+"}")
         self.tokendisplay.setStyleSheet('''
     QLCDNumber {
         background-color: black;

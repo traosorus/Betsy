@@ -85,7 +85,10 @@ class chatCompletion:
 
     # context est un fichier json
     def __init__(self, context):
-        openai.api_key = "API KEY"
+        with open("/Users/traosorus/Documents/GitHub/Betsy/BetsyApp/API_key.txt","r") as key:
+            API_key = key.read() 
+            print(API_key)
+        openai.api_key = API_key
         self.context = self.jsonload(filename=context)
         self.completion = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",

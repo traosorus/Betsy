@@ -3,8 +3,11 @@ import json
 from PyQt5.QtCore import QThread,pyqtSignal
 
 
+
 class chatCompletion(QThread):
     responseChanged = pyqtSignal(str)
+    with open("/Users/traosorus/Documents/GitHub/Betsy/BetsyApp/API_key.txt","r") as key:
+        API_key = key.read() 
 
     def __init__(self, context, maxtkns,temp):
         super().__init__()
@@ -14,8 +17,10 @@ class chatCompletion(QThread):
         self._response = None
 
     def run(self):
-    
-        openai.api_key = "API key"
+        with open("/Users/traosorus/Documents/GitHub/Betsy/BetsyApp/API_key.txt","r") as key:
+            API_key = key.read() 
+            print(API_key)
+        openai.api_key = API_key
         with open(self.context) as f:
             messages = json.load(f)
         completion = openai.ChatCompletion.create(

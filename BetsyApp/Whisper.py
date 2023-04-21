@@ -75,7 +75,9 @@ class Transcriber():
         audio_file.export(self.output_file, format="mp3")
 
         # transcribe the audio using OpenAI
-        openai.api_key = "API key"
+        with open("/Users/traosorus/Documents/GitHub/Betsy/BetsyApp/API_key.txt","r") as key:
+            API_key = key.read() 
+        openai.api_key = API_key
         audio_file = open(self.output_file, "rb")
         self.transcript = openai.Audio.transcribe("whisper-1", audio_file)
         self.label.setText("Trés bien vérifiez si j'ai bien noté votre requête avant de l'envoyer")
