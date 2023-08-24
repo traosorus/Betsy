@@ -56,6 +56,8 @@ class BetsyGUI(object):
 
         self.transcript = QtWidgets.QPushButton(self.widget_3)
         self.transcript.setText("")
+        self.transcripts = QtWidgets.QPushButton(self.widget_3)
+        self.transcripts.setText("stop")
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("BetsyApp/Images/icons/icons/png/24/music/sound-wave@2x.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.transcript.setIcon(icon)
@@ -63,6 +65,8 @@ class BetsyGUI(object):
         self.transcript.setFlat(True)
         self.transcript.setObjectName("transcript")
         self.gridLayout.addWidget(self.transcript, 1, 1, 1, 1)
+        self.gridLayout.addWidget(self.transcripts, 2, 1, 2, 1)
+
         self.sendButton = QtWidgets.QPushButton(self.widget_3)
         self.sendButton.setText("")
         icon1 = QtGui.QIcon()

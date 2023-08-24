@@ -3,6 +3,7 @@ from Betsy_2 import BetsyGUI
 from PyQt5 import QtWidgets
 from Betsy_root import Engine
 from PyQt5 import QtCore, QtGui, QtWidgets
+from CtxtGui import Ui_Form
 import sys
 
 # Définition de la classe BetsyApp qui va encapsuler notre application
@@ -30,6 +31,7 @@ class BetsyApp:
         self.output = self.Betsy.chatlog
         self.input_entry = self.Betsy.userentry
         self.system = self.Betsy.systementry
+        self.recording = False
       
         # Récupération de la liste des contextes disponibles dans le moteur de traitement Engine
         context_list = self.engine.context_list()
@@ -64,14 +66,23 @@ class BetsyApp:
             self.engine.get_selected_value(input=self.input_entry, output=self.output, system=self.system, choice=self.Betsy.comboBox.currentText())
         
         def transcription():
-            a=self.engine.transcript(self.Betsy.Duration_label)
-            self.Betsy.userentry.append(a)
+            from PyQt5.QtWidgets import QDialog
+            dial = QDialog()
+
+            self.engine.transcript(dial,destination= self.input_entry)
+     
+        
+        def create_context():
+            gui = Ui_Form()
+            gui.StartApp()
+            
        
             
         new_workspace()
         # Connexion des signaux de l'interface utilisateur aux fonctions correspondantes
         self.Betsy.actionEnregistrer_le_seane_de_travail.triggered.connect(save_workspace)
         self.Betsy.actionNouvelle_seance_de_travail.triggered.connect(new_workspace)
+        self.Betsy.actionCreer_un_nouveau_contexte.triggered.connect(create_context)
         self.Betsy.sendButton.clicked.connect(submit)
         self.Betsy.applyButton.clicked.connect(get_context)
         self.Betsy.transcript.clicked.connect(transcription)

@@ -2,7 +2,7 @@ import openai
 import json
 import os
 import shutil
-from Whisper import Transcriber
+from Whisper import AudioRecorderApp
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QCoreApplication, QEventLoop, QTimer, QThread
 import sys
@@ -62,6 +62,9 @@ class Engine:
             response_data = {'role': 'assistant', 'content': response}
             self._add_to_json_file(self.temp_file_path, response_data)
             output.append("\n" + "\n" + "Betsy: " + response)
+
+    def _update_input(self, response, input):
+            input.append(response)
 
 
 
@@ -140,10 +143,13 @@ class Engine:
  
         box.StartApp()
     
-    def transcript(self,tm):
-        ts = Transcriber(tm)
-        return ts.transcript
-        
+    def transcript(self,dialogwindow,destination):
+            window = AudioRecorderApp(destination)
+            window.exec_()
+    
+
+
+
 
 from PyQt5.QtWidgets import QDialog, QLabel, QLineEdit, QPushButton, QVBoxLayout
 

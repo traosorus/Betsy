@@ -2,12 +2,11 @@ import sys
 import os
 import wave
 import pyaudio
-import openai
 from PyQt5.QtWidgets import QApplication, QDialog, QVBoxLayout, QPushButton, QLabel
 from PyQt5.QtCore import Qt, QTimer
 
 class AudioRecorderApp(QDialog):
-    def __init__(self,output):
+    def __init__(self):
         super().__init__()
 
 
@@ -18,7 +17,6 @@ class AudioRecorderApp(QDialog):
         self.timer.timeout.connect(self.update_timer)
         self.timer_interval = 1000  # Interval in milliseconds
         self.total_time = 0
-        self.out= output
 
     def init_ui(self):
         self.setWindowTitle("Enregistreur Vocal")
@@ -90,28 +88,11 @@ class AudioRecorderApp(QDialog):
         wf.writeframes(b''.join(self.frames))
         wf.close()
         print(f"Enregistrement sauvegardé sous : {output_file}")
-        with open("/Users/m2/Documents/GitHub/Betsy/API_key.txt","r") as key:
-            API_key = key.read() 
-            openai.api_key = API_key
-            audio_file = open(output_file, "rb")
-            self.transcript = openai.Audio.transcribe("whisper-1", audio_file)
-            self.transcript = self.transcript.text
-            self.out.append(self.transcript)
 
-# def main():
-#     app = QApplication(sys.argv)
-#     window = AudioRecorderApp()
-#     window.exec_()
+def main():
+    app = QApplication(sys.argv)
+    window = AudioRecorderApp()
+    window.exec_()
 
-# if __name__ == "__main__":
-#     main()
-
-
- 
-        
-
-
-        
-        
-
- 
+if __name__ == "__main__":
+    main()

@@ -17,8 +17,10 @@ import json
 class Ui_Form(): 
     
     def __init__(self) :
+        
         self.Form = QDialog()
         self.setupUi(self.Form)
+   
     def StartApp(self):
         
         self.Form.exec_()
